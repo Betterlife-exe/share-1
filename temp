@@ -41,30 +41,30 @@ public class SwordScript : MonoBehaviour
 
       if(device.TryGetFeatureValue(primaryButton, out primaryButtonState) && primaryButtonState){
         if(device.TryGetFeatureValue(secondaryButton, out secondaryButtonState) && secondaryButtonState){
-          defaultSword.SetActive(False);
-          largeShatterSword.SetActive(False);
-          wand.SetActive(False);
-          crossbow.SetActive(True);
+          defaultSword.SetActive(false);
+          largeShatterSword.SetActive(false);
+          wand.SetActive(false);
+          crossbow.SetActive(true);
         }
         else{
-          defaultSword.SetActive(False);
-          largeShatterSword.SetActive(False);
-          wand.SetActive(True);
-          crossbow.SetActive(False);
+          defaultSword.SetActive(false);
+          largeShatterSword.SetActive(false);
+          wand.SetActive(true);
+          crossbow.SetActive(false);
         }
       }
       else{
         if(device.TryGetFeatureValue(secondaryButton, out secondaryButtonState) && secondaryButtonState){
-          defaultSword.SetActive(False);
-          largeShatterSword.SetActive(True);
-          wand.SetActive(False);
-          crossbow.SetActive(False);
+          defaultSword.SetActive(false);
+          largeShatterSword.SetActive(true);
+          wand.SetActive(false);
+          crossbow.SetActive(false);
         }
         else{
-          defaultSword.SetActive(True);
-          largeShatterSword.SetActive(False);
-          wand.SetActive(False);
-          crossbow.SetActive(False);
+          defaultSword.SetActive(true);
+          largeShatterSword.SetActive(false);
+          wand.SetActive(false);
+          crossbow.SetActive(false);
         }
       }
 
