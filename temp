@@ -1,0 +1,73 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.XR;
+
+public class SwordScript : MonoBehaviour
+{
+// https://www.youtube.com/watch?v=TLNVWojcbEE&list=PLQMQNmwN3Fvx2d7uNxMkVOs1aUV-vxrlf&index=17
+  public GameObject defaultSword;
+  public GameObject largeShatterSword;
+  public GameObject wand;
+  public GameObject crossbow;
+
+  private XRNode xrNode = XRNode.RightHand;
+  private List<InputDevice> devices = new List<InputDevice>();
+  private InputDevice device;
+
+    void GetDevice(){
+      InputDevices.GetDevicesAtXRNode(xrNode, devices);
+      controller = devices.RightHand();
+    }
+
+    void OnEnable(){
+      if (!device.isValid){
+        GetDevice();
+      }
+    }
+
+    void Start(){
+
+    }
+
+    void Update(){
+/* enable if controller support drops out
+      if (!device.isValid){
+        GetDevice();
+      }
+*/
+      bool primaryButtonState;
+      bool secondaryButtonState;
+
+      if(device.TryGetFeatureValue(primaryButton, out primaryButtonState) && primaryButtonState){
+        if(device.TryGetFeatureValue(secondaryButton, out secondaryButtonState) && secondaryButtonState){
+          defaultSword.SetActive(False);
+          largeShatterSword.SetActive(False);
+          wand.SetActive(False);
+          crossbow.SetActive(True);
+        }
+        else{
+          defaultSword.SetActive(False);
+          largeShatterSword.SetActive(False);
+          wand.SetActive(True);
+          crossbow.SetActive(False);
+        }
+      }
+      else{
+        if(device.TryGetFeatureValue(secondaryButton, out secondaryButtonState) && secondaryButtonState){
+          defaultSword.SetActive(False);
+          largeShatterSword.SetActive(True);
+          wand.SetActive(False);
+          crossbow.SetActive(False);
+        }
+        else{
+          defaultSword.SetActive(True);
+          largeShatterSword.SetActive(False);
+          wand.SetActive(False);
+          crossbow.SetActive(False);
+        }
+      }
+
+
+    }
+}
