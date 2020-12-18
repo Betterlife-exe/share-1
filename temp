@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class SwordScript : MonoBehaviour
 {
@@ -13,8 +14,7 @@ public class SwordScript : MonoBehaviour
 
 
 
-    void CheckButtons(InputDevice rightController, GameObject defaultSword, GameObject largeShatterSword, GameObject wand, GameObject crossbow){
-
+    void CheckButtons(InputDevice rightController, GameObject defaultSword, GameObject largeShatterSword, GameObject wand, GameObject crossbow){  //
       bool primaryButtonState;
       bool secondaryButtonState;
 
@@ -56,7 +56,7 @@ public class SwordScript : MonoBehaviour
     void Update(){
       List<InputDevice> m_device = new List<InputDevice>();
      InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Right,m_device);
-      CheckButtons(m_device[0]);
+      CheckButtons(m_device[0], defaultSword, largeShatterSword, wand, crossbow);
 
     }
 
