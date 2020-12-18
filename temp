@@ -5,42 +5,21 @@ using UnityEngine.XR;
 
 public class SwordScript : MonoBehaviour
 {
-// https://www.youtube.com/watch?v=TLNVWojcbEE&list=PLQMQNmwN3Fvx2d7uNxMkVOs1aUV-vxrlf&index=17
+
   public GameObject defaultSword;
   public GameObject largeShatterSword;
   public GameObject wand;
   public GameObject crossbow;
 
-  private XRNode xrNode = XRNode.RightHand;
-  private List<InputDevice> devices = new List<InputDevice>();
-  private InputDevice device;
 
-    void GetDevice(){
-      InputDevices.GetDevicesAtXRNode(xrNode, devices);
-      controller = devices.RightHand();
-    }
 
-    void OnEnable(){
-      if (!device.isValid){
-        GetDevice();
-      }
-    }
+    void CheckButtons(InputDevice rightController, GameObject defaultSword, GameObject largeShatterSword, GameObject wand, GameObject crossbow){
 
-    void Start(){
-
-    }
-
-    void Update(){
-/* enable if controller support drops out
-      if (!device.isValid){
-        GetDevice();
-      }
-*/
       bool primaryButtonState;
       bool secondaryButtonState;
 
-      if(device.TryGetFeatureValue(primaryButton, out primaryButtonState) && primaryButtonState){
-        if(device.TryGetFeatureValue(secondaryButton, out secondaryButtonState) && secondaryButtonState){
+      if(rightController.TryGetFeatureValue(CommonUsages.primaryButton, out primaryButtonState) && primaryButtonState){
+        if(rightController.TryGetFeatureValue(CommonUsages.secondaryButton, out secondaryButtonState) && secondaryButtonState){
           defaultSword.SetActive(false);
           largeShatterSword.SetActive(false);
           wand.SetActive(false);
@@ -51,10 +30,10 @@ public class SwordScript : MonoBehaviour
           largeShatterSword.SetActive(false);
           wand.SetActive(true);
           crossbow.SetActive(false);
-        }
       }
+    }
       else{
-        if(device.TryGetFeatureValue(secondaryButton, out secondaryButtonState) && secondaryButtonState){
+        if(rightController.TryGetFeatureValue(CommonUsages.secondaryButton, out secondaryButtonState) && secondaryButtonState){
           defaultSword.SetActive(false);
           largeShatterSword.SetActive(true);
           wand.SetActive(false);
@@ -68,6 +47,17 @@ public class SwordScript : MonoBehaviour
         }
       }
 
+    }
+
+    void OnEnable(){}
+
+    void Start(){}
+
+    void Update(){
+      List<InputDevice> m_device = new List<InputDevice>();
+     InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Right,m_device);
+      CheckButtons(m_device[0]);
 
     }
+
 }
