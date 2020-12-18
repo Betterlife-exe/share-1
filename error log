@@ -1,7 +1,1 @@
-no overload for method getdeviceatxrnode 
-
-the name controller does not exist in the current context
-
-inputdevice does not contain the definition for righthand and no ......
-
-the name primarybutton and secondarybutton do not exist in the current context
+SwordScript.cs(59,7) there is no argument given that corresponds to the required formal perameter 'defaultsword'
