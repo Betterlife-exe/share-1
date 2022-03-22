@@ -1,2 +1,1 @@
-cleared old project
-no error, currently code scrap
+line 210, UpdateAnimationState cannot be subscribed in the same mannar as updateInputs
